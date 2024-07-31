@@ -1,0 +1,462 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ppx:project xmlns:ppx="http://www.plcopen.org/xml/tc6_0201" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:ns1="http://www.plcopen.org/xml/tc6_0201">
+  <ppx:fileHeader companyName="Unknown" productName="Unnamed" productVersion="1" creationDateTime="2022-06-03T13:37:24"/>
+  <ppx:contentHeader name="Unnamed" modificationDateTime="2023-02-19T01:36:55">
+    <ppx:coordinateInfo>
+      <ppx:fbd>
+        <ppx:scaling x="10" y="10"/>
+      </ppx:fbd>
+      <ppx:ld>
+        <ppx:scaling x="10" y="10"/>
+      </ppx:ld>
+      <ppx:sfc>
+        <ppx:scaling x="10" y="10"/>
+      </ppx:sfc>
+    </ppx:coordinateInfo>
+  </ppx:contentHeader>
+  <ppx:types>
+    <ppx:dataTypes/>
+    <ppx:pous>
+      <ppx:pou name="ConveyorV1" pouType="program">
+        <ppx:interface>
+          <ppx:localVars>
+            <ppx:variable name="StartButton" address="%IX100.0">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="SafeDoor" address="%IX100.1">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="Box_Not_Waiting" address="%IX100.2">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="Picker_Holding" address="%IX100.3">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="Picker_Rotating" address="%IX100.4">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="Picker_Moving_Z" address="%IX100.5">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="Conveyor_Move" address="%QX100.0">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="Picker_Move_Down" address="%QX100.1">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="Picker_Grab" address="%QX100.2">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="Picker_Rotate_CCW" address="%QX100.3">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+            <ppx:variable name="Picker_Rotate_CW" address="%QX100.4">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+          </ppx:localVars>
+          <ppx:localVars>
+            <ppx:variable name="RUN">
+              <ppx:type>
+                <ppx:BOOL/>
+              </ppx:type>
+            </ppx:variable>
+          </ppx:localVars>
+        </ppx:interface>
+        <ppx:body>
+          <ppx:LD>
+            <ppx:leftPowerRail localId="1" width="10" height="240">
+              <ppx:position x="60" y="60"/>
+              <ppx:connectionPointOut formalParameter="">
+                <ppx:relPosition x="10" y="20"/>
+              </ppx:connectionPointOut>
+              <ppx:connectionPointOut formalParameter="">
+                <ppx:relPosition x="10" y="60"/>
+              </ppx:connectionPointOut>
+              <ppx:connectionPointOut formalParameter="">
+                <ppx:relPosition x="10" y="100"/>
+              </ppx:connectionPointOut>
+              <ppx:connectionPointOut formalParameter="">
+                <ppx:relPosition x="10" y="140"/>
+              </ppx:connectionPointOut>
+              <ppx:connectionPointOut formalParameter="">
+                <ppx:relPosition x="10" y="180"/>
+              </ppx:connectionPointOut>
+              <ppx:connectionPointOut formalParameter="">
+                <ppx:relPosition x="10" y="220"/>
+              </ppx:connectionPointOut>
+            </ppx:leftPowerRail>
+            <ppx:contact localId="7" height="20" width="21" negated="false">
+              <ppx:position x="130" y="70"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="1">
+                  <ppx:position x="130" y="80"/>
+                  <ppx:position x="70" y="80"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>StartButton</ppx:variable>
+            </ppx:contact>
+            <ppx:contact localId="8" height="20" width="21" negated="false">
+              <ppx:position x="220" y="70"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="7">
+                  <ppx:position x="220" y="80"/>
+                  <ppx:position x="151" y="80"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>SafeDoor</ppx:variable>
+            </ppx:contact>
+            <ppx:coil localId="9" height="20" width="21" negated="false">
+              <ppx:position x="340" y="70"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="8">
+                  <ppx:position x="340" y="80"/>
+                  <ppx:position x="241" y="80"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>RUN</ppx:variable>
+            </ppx:coil>
+            <ppx:contact localId="10" height="20" width="21" negated="false">
+              <ppx:position x="130" y="150"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="1">
+                  <ppx:position x="130" y="160"/>
+                  <ppx:position x="70" y="160"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>RUN</ppx:variable>
+            </ppx:contact>
+            <ppx:contact localId="11" height="20" width="21" negated="false" edge="falling">
+              <ppx:position x="220" y="150"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="10">
+                  <ppx:position x="220" y="160"/>
+                  <ppx:position x="151" y="160"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Box_Not_Waiting</ppx:variable>
+            </ppx:contact>
+            <ppx:contact localId="12" height="20" width="21" negated="true">
+              <ppx:position x="340" y="150"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="11">
+                  <ppx:position x="340" y="160"/>
+                  <ppx:position x="241" y="160"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Holding</ppx:variable>
+            </ppx:contact>
+            <ppx:coil localId="13" height="20" width="21" negated="false" storage="set">
+              <ppx:position x="490" y="130"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="12">
+                  <ppx:position x="490" y="140"/>
+                  <ppx:position x="445" y="140"/>
+                  <ppx:position x="445" y="160"/>
+                  <ppx:position x="361" y="160"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Move_Down</ppx:variable>
+            </ppx:coil>
+            <ppx:coil localId="14" height="20" width="21" negated="false" storage="set">
+              <ppx:position x="490" y="170"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="12">
+                  <ppx:position x="490" y="180"/>
+                  <ppx:position x="445" y="180"/>
+                  <ppx:position x="445" y="160"/>
+                  <ppx:position x="361" y="160"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Grab</ppx:variable>
+            </ppx:coil>
+            <ppx:contact localId="15" height="20" width="21" negated="false">
+              <ppx:position x="130" y="110"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="1">
+                  <ppx:position x="130" y="120"/>
+                  <ppx:position x="70" y="120"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>RUN</ppx:variable>
+            </ppx:contact>
+            <ppx:contact localId="16" height="20" width="21" negated="false">
+              <ppx:position x="220" y="110"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="15">
+                  <ppx:position x="220" y="120"/>
+                  <ppx:position x="151" y="120"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Box_Not_Waiting</ppx:variable>
+            </ppx:contact>
+            <ppx:coil localId="17" height="20" width="21" negated="false">
+              <ppx:position x="340" y="110"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="16">
+                  <ppx:position x="340" y="120"/>
+                  <ppx:position x="241" y="120"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Conveyor_Move</ppx:variable>
+            </ppx:coil>
+            <ppx:contact localId="18" height="20" width="21" negated="false">
+              <ppx:position x="130" y="190"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="1">
+                  <ppx:position x="130" y="200"/>
+                  <ppx:position x="70" y="200"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>RUN</ppx:variable>
+            </ppx:contact>
+            <ppx:contact localId="19" height="20" width="21" negated="false">
+              <ppx:position x="130" y="230"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="1">
+                  <ppx:position x="130" y="240"/>
+                  <ppx:position x="70" y="240"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>RUN</ppx:variable>
+            </ppx:contact>
+            <ppx:contact localId="20" height="20" width="21" negated="false">
+              <ppx:position x="130" y="270"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="1">
+                  <ppx:position x="130" y="280"/>
+                  <ppx:position x="70" y="280"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>RUN</ppx:variable>
+            </ppx:contact>
+            <ppx:contact localId="21" height="20" width="21" negated="false" edge="rising">
+              <ppx:position x="220" y="190"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="18">
+                  <ppx:position x="220" y="200"/>
+                  <ppx:position x="151" y="200"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Holding</ppx:variable>
+            </ppx:contact>
+            <ppx:coil localId="22" height="20" width="21" negated="false" storage="reset">
+              <ppx:position x="360" y="190"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="21">
+                  <ppx:position x="360" y="200"/>
+                  <ppx:position x="241" y="200"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Move_Down</ppx:variable>
+            </ppx:coil>
+            <ppx:contact localId="23" height="20" width="21" negated="false" edge="falling">
+              <ppx:position x="220" y="230"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="19">
+                  <ppx:position x="220" y="240"/>
+                  <ppx:position x="151" y="240"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Moving_Z</ppx:variable>
+            </ppx:contact>
+            <ppx:contact localId="24" height="20" width="21" negated="false" edge="falling">
+              <ppx:position x="220" y="270"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="20">
+                  <ppx:position x="220" y="280"/>
+                  <ppx:position x="151" y="280"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Rotating</ppx:variable>
+            </ppx:contact>
+            <ppx:coil localId="25" height="20" width="21" negated="false" storage="set">
+              <ppx:position x="530" y="220"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="23">
+                  <ppx:position x="530" y="230"/>
+                  <ppx:position x="385" y="230"/>
+                  <ppx:position x="385" y="240"/>
+                  <ppx:position x="241" y="240"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Rotate_CCW</ppx:variable>
+            </ppx:coil>
+            <ppx:coil localId="26" height="20" width="21" negated="false" storage="reset">
+              <ppx:position x="530" y="260"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="23">
+                  <ppx:position x="530" y="270"/>
+                  <ppx:position x="385" y="270"/>
+                  <ppx:position x="385" y="240"/>
+                  <ppx:position x="241" y="240"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Rotate_CW</ppx:variable>
+            </ppx:coil>
+            <ppx:coil localId="27" height="20" width="21" negated="false" storage="reset">
+              <ppx:position x="530" y="300"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="24">
+                  <ppx:position x="530" y="310"/>
+                  <ppx:position x="385" y="310"/>
+                  <ppx:position x="385" y="280"/>
+                  <ppx:position x="241" y="280"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Grab</ppx:variable>
+            </ppx:coil>
+            <ppx:coil localId="28" height="20" width="21" negated="false" storage="set">
+              <ppx:position x="530" y="340"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="24">
+                  <ppx:position x="530" y="350"/>
+                  <ppx:position x="385" y="350"/>
+                  <ppx:position x="385" y="280"/>
+                  <ppx:position x="241" y="280"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Rotate_CW</ppx:variable>
+            </ppx:coil>
+            <ppx:coil localId="29" height="20" width="21" negated="false" storage="reset">
+              <ppx:position x="530" y="380"/>
+              <ppx:connectionPointIn>
+                <ppx:relPosition x="0" y="10"/>
+                <ppx:connection refLocalId="24">
+                  <ppx:position x="530" y="390"/>
+                  <ppx:position x="385" y="390"/>
+                  <ppx:position x="385" y="280"/>
+                  <ppx:position x="241" y="280"/>
+                </ppx:connection>
+              </ppx:connectionPointIn>
+              <ppx:connectionPointOut>
+                <ppx:relPosition x="21" y="10"/>
+              </ppx:connectionPointOut>
+              <ppx:variable>Picker_Rotate_CCW</ppx:variable>
+            </ppx:coil>
+          </ppx:LD>
+        </ppx:body>
+      </ppx:pou>
+    </ppx:pous>
+  </ppx:types>
+  <ppx:instances>
+    <ppx:configurations>
+      <ppx:configuration name="Config0">
+        <ppx:resource name="Res0">
+          <ppx:task name="task0" priority="0" interval="T#20ms">
+            <ppx:pouInstance name="instance0" typeName="ConveyorV1"/>
+          </ppx:task>
+        </ppx:resource>
+      </ppx:configuration>
+    </ppx:configurations>
+  </ppx:instances>
+</ppx:project>
